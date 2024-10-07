@@ -1,4 +1,7 @@
 # Changelog
+## v0.3.0-beta
+Changes:
+- Rewrote Chudnovsky algorithm
 ## v0.2.0-beta
 Changes:
 - Reworked internal code for √2 and Fibonacci Sequence

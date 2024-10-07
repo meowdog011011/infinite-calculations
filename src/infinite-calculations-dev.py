@@ -7,7 +7,7 @@ def print(string: str):
     orig_print(string, end = "", flush = True)
 
 # main
-print("Welcome to Infinite Calculations\nVersion: 0.2.0-beta\nCopyright 2024 Te Du\n\n")
+print("Welcome to Infinite Calculations\nVersion: 0.3.0-beta\nCopyright 2024 Te Du\n\n")
 sleep(1)
 print("What would you like to calculate?\n(A) π: Chudnovsky Algorithm\n(B) π: Gosper's series\n(C) √2\n(D) Fibonacci Sequence\n\n")
 sleep(1)
@@ -20,12 +20,21 @@ try:
         # imports
         from decimal import Decimal, getcontext
 
-        # set variables
-        M = Decimal(1)
-        L = Decimal(13591409)
-        X = Decimal(1)
-        K = Decimal(6)
-        S = L
+        # define binary splitting algorithm
+        def binary_split(a, b):
+            if a + 1 == b:
+                P = -(6 * a - 5) * (2 * a - 1) *(6 * a - 1)
+                Q = 10939058860032000 * a ** 3
+                R = P * (545140134 * a + 13591409)
+            else:
+                m = (a + b) // 2
+                Pam, Qam, Ram = binary_split(a, m)
+                Pmb, Qmb, Rmb = binary_split(m, b)
+
+                P = Pam * Pmb
+                Q = Qam * Qmb
+                R = Qmb * Ram + Pam * Rmb
+            return P, Q, R
 
         # main
         print("Infinite Calculations: The π Calculator\nMethod: Chudnovsky Algorithm\n\n")
@@ -34,14 +43,13 @@ try:
         if digits < 1:
             raise ValueError
         getcontext().prec = digits + 4
-        for i in range(1, digits):
-            M = (K**3 - 16 * K) * M / (i**3)
-            L += 545140134
-            X *= -262537412640768000
-            S += M * L / X
-            K += 12
-        pi = Decimal(426880) * Decimal(10005).sqrt() / S
-        print("\nπ: " + str(pi)[:digits + 2])
+        if digits + 4 < 28:
+            P, Q, R = binary_split(1, 2)
+        else:
+            from math import ceil
+            P, Q, R = binary_split(1, ceil(digits + 5 / 14))
+        del P
+        print("\nπ: " + str((426880 * Decimal(10005).sqrt() * Decimal(Q)) / (13591409 * Decimal(Q) + Decimal(R)))[:digits + 2])
     elif calculation_option == "b":
         # π: Gosper's series
 
@@ -109,7 +117,7 @@ except ValueError:
     print("\nERROR: Invalid value.")
 except MemoryError:
     print("\nERROR: Not enough memory to complete process.")
-except:
-    print("\nERROR: Unknown error.")
+except Exception as e:
+    print("\nERROR: " + str(e))
 sleep(1)
 input("\n\nPress Enter to exit...")
