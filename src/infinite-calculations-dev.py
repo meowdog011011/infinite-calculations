@@ -9,7 +9,7 @@ def print(string: str):
 # main
 print("Welcome to Infinite Calculations\nVersion: 0.3.0-beta\nCopyright 2024 Te Du\n\n")
 sleep(1)
-print("What would you like to calculate?\n(A) π: Chudnovsky Algorithm\n(B) π: Gosper's series\n(C) √2\n(D) Fibonacci Sequence\n\n")
+print("What would you like to calculate?\n(A) π: Chudnovsky Algorithm\n(B) π: Gosper's series\n(C) √2\n(D) e\n(E) Fibonacci Sequence\n\n")
 sleep(1)
 try:
     calculation_option = input("Type A, B, C or D: ").lower()
@@ -90,6 +90,30 @@ try:
         getcontext().prec = digits + 4
         print("\n√2: " + str(Decimal(2).sqrt())[:digits + 2])
     elif calculation_option == "d":
+        # e
+
+        # imports
+        from decimal import Decimal, getcontext
+        from fractions import Fraction
+
+        # set variables
+        factorial = 1
+        e = 0
+        i = 1
+
+        # main
+        print("Infinite Calculations: The e Calculator\n\n")
+        sleep(1)
+        digits = int(input("How many digits would you like to calculate? "))
+        if digits < 1:
+            raise ValueError
+        getcontext().prec = digits + 5
+        while Decimal("2e" + str(digits)) >= factorial:
+            e += Fraction(1, factorial)
+            factorial *= i
+            i += 1
+        print("\ne: " + str(Decimal(e.numerator) / Decimal(e.denominator))[:digits + 2])
+    elif calculation_option == "e":
         # Fibonacci Sequence
 
         # set variables
