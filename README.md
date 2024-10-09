@@ -1,7 +1,7 @@
 # Infinite Calculations
 The obsession with irrational numbers that blossomed into a program.
 ## What is this?
-Infinite Calculations is an irrational number and infinite sequence calculator that currently calculates π, √2 and the Fibonacci sequence, with more to come.
+Infinite Calculations is an irrational number and infinite sequence calculator that currently calculates π, √2, e and the Fibonacci sequence, with more to come.
 ## Installation
 All you need to do is run `compile-into-exe.py` in its parent directory. If all goes well, Infinite Calculations should be located in the `dist` folder.
 ## Validation
