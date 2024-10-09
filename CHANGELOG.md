@@ -2,6 +2,7 @@
 ## v0.3.0-beta
 Changes:
 - Rewrote Chudnovsky algorithm
+- Added Euler's number (commonly known as e)
 ## v0.2.0-beta
 Changes:
 - Reworked internal code for √2 and Fibonacci Sequence
